@@ -2,13 +2,13 @@
 
 A management system for Libraries.
 
-[License](../blob/master/LICENSE)
+[License](../master/LICENSE)
 
 ## Information
 
-- [Scope of the System](../blob/master/docs/SCOPE.md)
-- [Supported Platforms](../blob/master/docs/SUPPORTED_PLATFORMS.md)
+- [Scope of the System](../master/docs/SCOPE.md)
+- [Supported Platforms](../master/docs/SUPPORTED_PLATFORMS.md)
 
 ## Contribution
 
-- [Todos](../blob/master/docs/TODOS.MD)
+- [Todos](../master/docs/TODOS.MD)
