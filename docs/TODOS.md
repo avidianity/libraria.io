@@ -15,6 +15,10 @@
 
 - [x] Design Database
 - [x] Define User Roles
+- [ ] Write Routes
+- [ ] Integrate controller actions to services
+- [ ] Write tests
+- [ ] Use CI/CD
 
 ### Feature-related
 
