@@ -8,6 +8,8 @@
 - [x] Decide on security methods. (Sanctum + Spatie Permissions)
 - [x] Define scope of system
 - [x] Define users
+- [ ] Setup Project
+- [ ] Create logo
 
 ## Feature-related
 
