@@ -8,8 +8,9 @@
 - [x] Decide on security methods. (Sanctum + Spatie Permissions)
 - [x] Define scope of system
 - [x] Define users
-- [ ] Setup Project
-- [ ] Create logo
+- [x] Setup Project (Web)
+- [ ] Setup Mobile Project (React-Native)
+- [x] Create logo
 
 ## Feature-related
 
@@ -23,3 +24,6 @@
 - [ ] Statistics-powered recommendations
 
 ## Optional
+
+- [ ] Payment System
+- [ ] UI Themes
