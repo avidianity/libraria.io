@@ -14,16 +14,15 @@
 ## Backend
 
 - [x] Design Database
-- [ ] Define User Roles
+- [x] Define User Roles
 
 ### Feature-related
 
-- [ ] Book categories
+- [x] Book categories
 - [ ] Book verification
 - [ ] Barcode/QR coding
 - [ ] Differentiation of free and paid books
 - [ ] [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) for book inputs
-- [ ] Book catalogs
 - [ ] Book records
 - [ ] Statistics-powered recommendations
 - [ ] Payment System
