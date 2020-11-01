@@ -11,4 +11,4 @@ A management system for Libraries.
 
 ## Contribution
 
-- [Todos](../master/docs/TODOS.MD)
+- [Todos](../master/docs/TODOS.md)
