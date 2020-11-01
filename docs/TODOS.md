@@ -13,7 +13,7 @@
 
 ## Backend
 
-- [ ] Design Database
+- [x] Design Database
 - [ ] Define User Roles
 
 ### Feature-related
