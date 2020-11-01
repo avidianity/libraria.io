@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Service;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +17,8 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('local')) {
             $this->app->register(TelescopeServiceProvider::class);
         }
+
+        $this->registerServices();
     }
 
     /**
@@ -26,5 +29,15 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+    }
+
+    /**
+     * Register all services as singletons.
+     */
+    public function registerServices()
+    {
+        $this->app->singleton(Service::class, function () {
+            return new Service();
+        });
     }
 }

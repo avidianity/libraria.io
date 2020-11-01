@@ -15,10 +15,15 @@
 
 - [x] Design Database
 - [x] Define User Roles
-- [ ] Write Routes
-- [ ] Integrate controller actions to services
-- [ ] Write tests
+- [x] Write Routes
+- [x] Integrate controller actions to services
+- [x] Write tests
+- [x] Write seeders
 - [ ] Use CI/CD
+
+### Specific
+
+- [ ] Create user authentication
 
 ### Feature-related
 
