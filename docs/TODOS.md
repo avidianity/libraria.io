@@ -33,7 +33,7 @@
 - [ ] Barcode/QR coding
 - [ ] Differentiation of free and paid books
 - [ ] [OCR](https://en.wikipedia.org/wiki/Optical_character_recognition) for book inputs
-- [ ] Book records
+- [x] Book records
 - [ ] Statistics-powered recommendations
 - [ ] Payment System
 
