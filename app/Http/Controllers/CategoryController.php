@@ -4,9 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware([
+            'auth:sanctum',
+            'role:Admin',
+        ])->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Category::all();
     }
 
     /**
@@ -25,7 +34,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:' . Category::class
+            ]
+        ]);
+        return Category::create($data);
     }
 
     /**
@@ -36,7 +53,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+        return $category;
     }
 
     /**
@@ -48,7 +65,8 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->only('name'));
+        return $category;
     }
 
     /**
@@ -59,6 +77,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return new Response('', 204);
     }
 }

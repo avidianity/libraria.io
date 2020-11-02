@@ -3,6 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FileController;
+use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +38,12 @@ Route::prefix('/v1')->group(function () {
     Route::apiResources([
         'authors' => AuthorController::class,
         'books' => BookController::class,
+        'categories' => CategoryController::class,
+        'tags' => TagController::class,
     ]);
+
+    Route::prefix('/file')->group(function () {
+        Route::get('/public/{id}', [FileController::class, 'streamAsPublic']);
+        Route::get('/private/{id}', [FileController::class, 'streamAsPrivate']);
+    });
 });

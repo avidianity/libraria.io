@@ -8,6 +8,12 @@ use Illuminate\Http\Response;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')
+            ->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +33,12 @@ class TagController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:255']
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:' . Tag::class
+            ]
         ]);
 
         return Tag::create($data);
