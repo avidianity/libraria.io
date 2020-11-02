@@ -23,7 +23,8 @@
 
 ### Specific
 
-- [ ] Create user authentication
+- [x] Create user authentication
+- [ ] Write routes for models
 
 ### Feature-related
 
