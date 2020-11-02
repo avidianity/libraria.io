@@ -41,19 +41,34 @@ class Book extends Model
     protected $appends = ['tags'];
 
     /**
+     * Register model events after booting.
+     * 
+     * @return void
+     */
+    public static function booted()
+    {
+        static::deleted(function ($book) {
+            $book->photo->delete();
+        });
+    }
+
+    /**
      * Get the tags of this book.
      * @return Tag[]
      */
     public function getTagsAttribute()
     {
-        $tags = [];
-        $ids = json_decode($this->attributes['tag_ids']);
+        if (isset($this->attributes['tag_ids']) && is_string($this->attributes['tag_ids'])) {
+            $tags = [];
+            $ids = json_decode($this->attributes['tag_ids']);
 
-        foreach ($ids as $id) {
-            $tags[] = Tag::find($id);
+            foreach ($ids as $id) {
+                $tags[] = Tag::find($id);
+            }
+
+            return $tags;
         }
-
-        return $tags;
+        return [];
     }
 
     public function photo()

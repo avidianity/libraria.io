@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AuthorController;
+use App\Http\Controllers\BookController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,6 @@ Route::prefix('/v1')->group(function () {
 
     Route::apiResources([
         'authors' => AuthorController::class,
+        'books' => BookController::class,
     ]);
 });

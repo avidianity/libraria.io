@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 
 class FileFactory extends Factory
 {
@@ -21,8 +22,12 @@ class FileFactory extends Factory
      */
     public function definition()
     {
+        $file = UploadedFile::fake()->create('photo', 150, 'image/png');
         return [
-            //
+            'type' => $file->getMimeType(),
+            'name' => $file->getClientOriginalName(),
+            'url' => $file->store('files'),
+            'size' => $file->getSize(),
         ];
     }
 }
