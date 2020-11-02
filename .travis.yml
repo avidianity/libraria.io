@@ -16,4 +16,4 @@ before_script:
 	- php artisan key:generate
 	- php artisan migrate
 script:
-  	- php artisan test
+  - php artisan test
