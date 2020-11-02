@@ -2,20 +2,18 @@ dist: bionic
 language: php
 php:
   	- 7.3
-services:
-  	- mysql
 cache:
-  	directories:
-   		- node_modules
-    	- vendor
+	directories:
+		- node_modules
+		- vendor
 before_script:
-  	- cp .env.travis .env
-  	- composer self-update
-  	- composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
-  	- chmod -R 777 storage bootstrap/cache
+	- cp .env.travis .env
+	- composer self-update
+	- composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+	- chmod -R 777 storage bootstrap/cache
 	- mkdir -p database
-    - touch database/database.sqlite
+	- touch database/database.sqlite
 	- php artisan key:generate
-  	- php artisan migrate
+	- php artisan migrate
 script:
   	- php artisan test
