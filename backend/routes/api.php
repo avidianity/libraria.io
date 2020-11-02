@@ -22,5 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/v1')->group(function () {
     Route::prefix('/auth')->group(function () {
         Route::post('/login', [AuthController::class, 'login']);
+        Route::post('/register', [AuthController::class, 'register']);
+        Route::middleware([
+            'auth:sanctum',
+            'role:Admin'
+        ])
+            ->post('/register/admin', [AuthController::class, 'registerAsAdmin']);
     });
 });

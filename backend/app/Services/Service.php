@@ -84,6 +84,15 @@ abstract class Service
     }
 
     /**
+     * Get all entries of the data.
+     * @return array
+     */
+    public function getAll()
+    {
+        return $this->data;
+    }
+
+    /**
      * Get a value from the data.
      * @param string $key
      * @return mixed

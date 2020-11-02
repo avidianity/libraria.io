@@ -54,6 +54,11 @@ class {$name} extends Service
      */
     protected \$keys = [];
 
+    public function __construct(\$data = null)
+    {
+        parent::__construct(\$data);
+        \$this->model;
+    }
 
 }");
 
