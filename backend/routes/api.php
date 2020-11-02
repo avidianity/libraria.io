@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthorController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,8 @@ Route::prefix('/v1')->group(function () {
         ])
             ->post('/register/admin', [AuthController::class, 'registerAsAdmin']);
     });
+
+    Route::apiResources([
+        'authors' => AuthorController::class,
+    ]);
 });

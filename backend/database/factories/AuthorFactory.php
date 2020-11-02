@@ -22,7 +22,9 @@ class AuthorFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'website' => $this->faker->url,
+            'address' => $this->faker->address,
+            'email' => $this->faker->safeEmail,
         ];
     }
 }

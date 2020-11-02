@@ -9,6 +9,12 @@ use Illuminate\Http\Response;
 
 class AuthorController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')
+            ->except('index', 'show');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -30,8 +36,11 @@ class AuthorController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate($this->rules());
-        $data['user_id'] = $request->user()->id;
-        return Author::create($data);
+        $author = new Author($data);
+        $request->user()
+            ->authors()
+            ->save($author);
+        return $author;
     }
 
     /**
@@ -51,13 +60,26 @@ class AuthorController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Author  $author
+     * @param  \App\Models\Author $author
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Author $author)
     {
         $data = $request->validate($this->rules('nullable'));
+
+        if (
+            $author->user_id !== $request->user()->id
+            &&
+            !$request->user()->hasRole(User::ADMIN)
+        ) {
+            return new Response([
+                'message' => 'You do not own that author.',
+                'errors' => [],
+            ], 403);
+        }
+
         $author->update($data);
+
         return $author;
     }
 

@@ -29,7 +29,9 @@ class Author extends Model
     public static function booted()
     {
         static::deleting(function ($author) {
-            $author->books->delete();
+            $author->books->each(function ($book) {
+                $book->delete();
+            });
         });
     }
 
