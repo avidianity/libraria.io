@@ -66,7 +66,7 @@ class File extends Model
     /**
      * Process a file dynamically.
      * @param string|Illuminate\Http\UploadedFile $file
-     * @return User
+     * @return static
      * @throws InvalidArgumentException
      * @throws FileNotFoundException
      */
@@ -133,13 +133,12 @@ class File extends Model
      * Alias for processURL
      *
      * @param string $url
-     * @param User|null $user
      * @return File
      * @throws FileNotFoundException
      */
-    public static function processURI(string $url, $user = null)
+    public static function processURI(string $url)
     {
-        return self::processURL($url, $user);
+        return self::processURL($url);
     }
 
     /**

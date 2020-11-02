@@ -4,61 +4,49 @@ namespace App\Http\Controllers;
 
 use App\Models\File;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function __construct()
     {
-        //
+        $this->middleware([
+            'auth:sanctum',
+            'role:Admin'
+        ])->except('streamAsPublic');
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
+     * Stream a public file as a response.
+     * 
+     * @param \Illuminate\Http\Request $request,
+     * @param \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function streamAsPublic(Request $request, File $file)
     {
-        //
+        if (!$file->public) {
+            return new Response('', 404);
+        }
+        return new Response(Storage::get($file->url), 200, [
+            'Content-Type' => $file->type,
+            'Content-Length' => $file->size,
+        ]);
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\File  $file
+     * Stream a private file as a response.
+     * 
+     * @param \Illuminate\Http\Request $request,
+     * @param \App\Models\File $file
      * @return \Illuminate\Http\Response
      */
-    public function show(File $file)
+    public function streamAsPrivate(Request $request, File $file)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, File $file)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\File  $file
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(File $file)
-    {
-        //
+        return new Response(Storage::get($file->url), 200, [
+            'Content-Type' => $file->type,
+            'Content-Length' => $file->size,
+        ]);
     }
 }

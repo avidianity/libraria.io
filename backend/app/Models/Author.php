@@ -14,7 +14,24 @@ class Author extends Model
      *
      * @var array
      */
-    protected $fillable = ['website', 'address', 'email', 'user_id'];
+    protected $fillable = [
+        'website',
+        'address',
+        'email',
+        'user_id'
+    ];
+
+    /**
+     * Register events after booting.
+     * 
+     * @return void
+     */
+    public static function booted()
+    {
+        static::deleting(function ($author) {
+            $author->books->delete();
+        });
+    }
 
     /**
      * Get the corresponding user.

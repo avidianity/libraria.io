@@ -2,6 +2,7 @@
 
 use App\Models\Author;
 use App\Models\Category;
+use App\Models\File;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,8 +19,9 @@ class CreateBooksTable extends Migration
         Schema::create('books', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('description');
+            $table->text('description');
             $table->json('tag_ids');
+            $table->foreignIdFor(new File(), 'photo_id');
             $table->foreignIdFor(new Category());
             $table->foreignIdFor(new Author());
             $table->timestamps();

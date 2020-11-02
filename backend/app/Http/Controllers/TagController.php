@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class TagController extends Controller
 {
@@ -14,7 +15,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        return Tag::all();
     }
 
     /**
@@ -25,7 +26,11 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => ['required', 'string', 'max:255']
+        ]);
+
+        return Tag::create($data);
     }
 
     /**
@@ -36,7 +41,7 @@ class TagController extends Controller
      */
     public function show(Tag $tag)
     {
-        //
+        return $tag;
     }
 
     /**
@@ -48,7 +53,8 @@ class TagController extends Controller
      */
     public function update(Request $request, Tag $tag)
     {
-        //
+        $tag->update($request->only('name'));
+        return $tag;
     }
 
     /**
@@ -59,6 +65,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return new Response('', 204);
     }
 }

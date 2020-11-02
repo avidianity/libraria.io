@@ -20,7 +20,8 @@ class Book extends Model
         'description',
         'tag_ids',
         'category_id',
-        'author_id'
+        'author_id',
+        'photo_id',
     ];
 
     /**
@@ -53,6 +54,11 @@ class Book extends Model
         }
 
         return $tags;
+    }
+
+    public function photo()
+    {
+        return $this->belongsTo(File::class, 'photo_id');
     }
 
     /**
