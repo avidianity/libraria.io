@@ -20,7 +20,7 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('tag_ids')->default(json_encode([]));
+            $table->text('tag_ids')->nullable();
             $table->foreignIdFor(new File(), 'photo_id');
             $table->foreignIdFor(new Category());
             $table->foreignIdFor(new Author());
