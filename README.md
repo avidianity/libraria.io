@@ -1,14 +1,5 @@
-# libraria.io
+# libraria.io-backend
 
-A management system for Libraries.
+[![Build Status](https://travis-ci.com/libraria-io/backend.svg?branch=master)](https://travis-ci.com/libraria-io/backend)
 
-
-## Information
-
-- [Scope of the System](../master/docs/SCOPE.md)
-- [Supported Platforms](../master/docs/SUPPORTED_PLATFORMS.md)
-- [License](../master/LICENSE)
-
-## Contribution
-
-- [Todos](../master/docs/TODOS.md)
+The backend repository of libraria.io.
