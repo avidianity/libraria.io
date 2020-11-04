@@ -8,6 +8,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,5 +48,9 @@ Route::prefix('/v1')->group(function () {
     Route::prefix('/file')->group(function () {
         Route::get('/public/{id}', [FileController::class, 'streamAsPublic']);
         Route::get('/private/{id}', [FileController::class, 'streamAsPrivate']);
+    });
+
+    Route::options('/visit', function () {
+        return new Response('', 204);
     });
 });

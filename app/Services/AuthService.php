@@ -18,6 +18,7 @@ class AuthService extends Service
     {
         parent::__construct($data);
         $this->model = new User();
+        $this->model = $this->model->with('roles');
     }
 
     public function authenticate()
