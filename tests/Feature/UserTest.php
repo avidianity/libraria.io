@@ -33,6 +33,7 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
         $user->assignRole(Role::create(['name' => User::ADMIN]));
+        Role::create(['name' => User::NORMAL]);
         $user->save();
         $token = $user->createToken(User::ADMIN);
 
@@ -63,6 +64,7 @@ class UserTest extends TestCase
     {
         $user = User::factory()->create();
         $user->assignRole(Role::findOrCreate(User::ADMIN));
+        Role::create(['name' => User::NORMAL]);
         $token = $user->createToken(User::ADMIN);
 
         $toUpdateUser = User::factory()->create();
