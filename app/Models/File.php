@@ -50,7 +50,7 @@ class File extends Model
         $scope = $property === 1 || $property === true ? 'public' : 'private';
         $id = $this->attributes['id'];
         $hash = Crypt::encryptString("{$id}");
-        return url("/file/{$scope}/{$hash}");
+        return url("/api/v1/file/{$scope}/{$hash}");
     }
 
     /**
@@ -66,21 +66,26 @@ class File extends Model
     /**
      * Process a file dynamically.
      * @param string|Illuminate\Http\UploadedFile $file
+     * @param boolean $public
      * @return static
      * @throws InvalidArgumentException
      * @throws FileNotFoundException
      */
-    public static function process($file)
+    public static function process($file, $public = false)
     {
+        $processed = null;
         if ($file instanceof UploadedFile) {
-            return self::processFile($file);
+            $processed = self::processFile($file);
         } elseif (is_string($file)) {
-            return self::processURL($file);
-        } else {
+            $processed = self::processURL($file);
+        }
+        if ($processed === null) {
             throw new InvalidArgumentException(
                 'File must be either a string url or an instance of Illuminate\Http\UploadedFile'
             );
         }
+        $processed->public = $public;
+        return $processed;
     }
 
     /**

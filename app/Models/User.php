@@ -49,6 +49,20 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Register events after booting.
+     * 
+     * @return void
+     */
+    public static function booted()
+    {
+        static::deleting(function ($user) {
+            $user->authors->each(function ($author) {
+                $author->delete();
+            });
+        });
+    }
+
     public function authors()
     {
         return $this->hasMany(Author::class);

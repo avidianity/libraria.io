@@ -6,6 +6,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +41,7 @@ Route::prefix('/v1')->group(function () {
         'books' => BookController::class,
         'categories' => CategoryController::class,
         'tags' => TagController::class,
+        'users' => UserController::class,
     ]);
 
     Route::prefix('/file')->group(function () {

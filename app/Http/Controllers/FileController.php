@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\File;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -21,11 +22,13 @@ class FileController extends Controller
      * Stream a public file as a response.
      * 
      * @param \Illuminate\Http\Request $request,
-     * @param \App\Models\File $file
+     * @param string $encryptedID
      * @return \Illuminate\Http\Response
      */
-    public function streamAsPublic(Request $request, File $file)
+    public function streamAsPublic(Request $request, $encryptedID)
     {
+        $id = Crypt::decryptString($encryptedID);
+        $file = File::findOrFail($id);
         if (!$file->public) {
             return new Response('', 404);
         }
@@ -39,11 +42,13 @@ class FileController extends Controller
      * Stream a private file as a response.
      * 
      * @param \Illuminate\Http\Request $request,
-     * @param \App\Models\File $file
+     * @param string $encryptedID
      * @return \Illuminate\Http\Response
      */
-    public function streamAsPrivate(Request $request, File $file)
+    public function streamAsPrivate(Request $request, $encryptedID)
     {
+        $id = Crypt::decryptString($encryptedID);
+        $file = File::findOrFail($id);
         return new Response(Storage::get($file->url), 200, [
             'Content-Type' => $file->type,
             'Content-Length' => $file->size,

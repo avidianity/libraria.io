@@ -28,6 +28,7 @@ class FileFactory extends Factory
             'name' => $file->getClientOriginalName(),
             'url' => $file->store('files'),
             'size' => $file->getSize(),
+            'public' => true,
         ];
     }
 }

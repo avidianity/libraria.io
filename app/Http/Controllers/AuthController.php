@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
