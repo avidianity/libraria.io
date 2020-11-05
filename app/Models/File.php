@@ -71,7 +71,7 @@ class File extends Model
      * @throws InvalidArgumentException
      * @throws FileNotFoundException
      */
-    public static function process($file, $public = false)
+    public static function process($file, $public = true)
     {
         $processed = null;
         if ($file instanceof UploadedFile) {

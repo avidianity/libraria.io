@@ -65,6 +65,10 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
         ],
 
+        'dropbox' => [
+            'driver' => 'dropbox',
+            'token'  => env('DROPBOX_ACCESS_TOKEN'),
+        ],
     ],
 
     /*
