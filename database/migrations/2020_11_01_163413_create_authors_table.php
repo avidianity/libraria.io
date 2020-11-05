@@ -29,6 +29,7 @@ class CreateAuthorsTable extends Migration
                 ->unique()
                 ->nullable()
                 ->default(null);
+            $table->string('name');
             $table->timestamps();
         });
     }

@@ -111,9 +111,10 @@ class AuthorController extends Controller
     protected function rules($mode = 'required')
     {
         return [
-            'website' => [$mode, 'url', 'string', 'max:255'],
-            'address' => [$mode, 'string', 'max:255'],
-            'email' => [$mode, 'email', 'string', 'max:255'],
+            'website' => ['nullable', 'url', 'string', 'max:255'],
+            'address' => ['nullable', 'string', 'max:255'],
+            'email' => ['nullable', 'email', 'string', 'max:255'],
+            'name' => [$mode, 'string', 'max:255'],
         ];
     }
 }

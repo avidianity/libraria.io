@@ -11,7 +11,7 @@ use Tests\TestCase;
 
 class AuthorTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, WithFaker;
 
     /**
      * Test fetch authors.
@@ -40,9 +40,10 @@ class AuthorTest extends TestCase
         $token = $user->createToken('normal');
 
         $response = $this->post('/api/v1/authors', [
-            'website' => 'https://author.com',
-            'address' => 'Address, Country',
+            'website' => $this->faker->url,
+            'address' => $this->faker->country,
             'email' => $user->email,
+            'name' => $user->name,
         ], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer {$token->plainTextToken}"
@@ -59,9 +60,10 @@ class AuthorTest extends TestCase
     public function testCreateAuthorWithoutAuthentication()
     {
         $response = $this->post('/api/v1/authors', [
-            'website' => 'https://author.com',
-            'address' => 'Address, Country',
-            'email' => 'email@email.com',
+            'website' => $this->faker->url,
+            'address' => $this->faker->country,
+            'email' => $this->faker->safeEmail,
+            'name' => $this->faker->name,
         ], [
             'Accept' => 'application/json',
         ]);
@@ -88,9 +90,10 @@ class AuthorTest extends TestCase
             ->create(['user_id' => $user->id]);
 
         $response = $this->put("/api/v1/authors/{$author->id}", [
-            'website' => 'https://author.com',
-            'address' => 'Address, Country',
+            'website' => $this->faker->url,
+            'address' => $this->faker->address,
             'email' => $user->email,
+            'name' => $this->faker->name,
         ], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer {$token->plainTextToken}"
@@ -118,9 +121,10 @@ class AuthorTest extends TestCase
             ->create(['user_id' => User::factory()->create()->id]);
 
         $response = $this->put("/api/v1/authors/{$author->id}", [
-            'website' => 'https://author.com',
-            'address' => 'Address, Country',
+            'website' => $this->faker->url,
+            'address' => $this->faker->address,
             'email' => $user->email,
+            'name' => $this->faker->name,
         ], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer {$token->plainTextToken}"
@@ -148,9 +152,10 @@ class AuthorTest extends TestCase
             ->create(['user_id' => User::factory()->create()->id]);
 
         $response = $this->put("/api/v1/authors/{$author->id}", [
-            'website' => 'https://author.com',
-            'address' => 'Address, Country',
+            'website' => $this->faker->url,
+            'address' => $this->faker->address,
             'email' => $user->email,
+            'name' => $this->faker->name,
         ], [
             'Accept' => 'application/json',
             'Authorization' => "Bearer {$token->plainTextToken}"

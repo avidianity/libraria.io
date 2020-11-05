@@ -25,6 +25,7 @@ class AuthorFactory extends Factory
             'website' => $this->faker->url,
             'address' => $this->faker->address,
             'email' => $this->faker->safeEmail,
+            'name' => $this->faker->name,
         ];
     }
 }

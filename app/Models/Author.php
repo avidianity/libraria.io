@@ -18,7 +18,8 @@ class Author extends Model
         'website',
         'address',
         'email',
-        'user_id'
+        'user_id',
+        'name',
     ];
 
     /**
