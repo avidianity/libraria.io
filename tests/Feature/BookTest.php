@@ -137,4 +137,33 @@ class BookTest extends TestCase
 
         $response->assertNoContent();
     }
+
+    /**
+     * Test create book without photo.
+     * 
+     * @return void
+     */
+    public function testCreateBookWithoutPhoto()
+    {
+        $user = User::factory()->create();
+        $author = Author::factory()
+            ->create(['user_id' => $user->id]);
+        $category = Category::factory()
+            ->create();
+
+        $token = $user->createToken('admin');
+
+        $response = $this->post('/api/v1/books', [
+            'title' => $this->faker->title,
+            'description' => $this->faker->text,
+            'category_id' => $category->id,
+            'author_id' => $author->id,
+            'photo' => null,
+        ], [
+            'Accept' => 'application/json',
+            'Authorization' => "Bearer {$token->plainTextToken}"
+        ]);
+
+        $response->assertStatus(422);
+    }
 }

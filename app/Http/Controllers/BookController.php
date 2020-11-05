@@ -137,7 +137,7 @@ class BookController extends Controller
             'tag_ids.*' => ['numeric', 'exists:' . Tag::class . ',id'],
             'category_id' => [$mode, 'numeric', 'exists:' . Category::class . ',id'],
             'author_id' => [$mode, 'numeric', 'exists:' . Author::class . ',id'],
-            'photo' => [$mode],
+            'photo' => [$mode, 'fileOrString'],
         ];
     }
 }
