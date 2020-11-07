@@ -13,16 +13,17 @@ cache:
 
 before_script:
   - cp .env.travis .env
-
   - sudo mysql -e 'CREATE DATABASE testing;'
-
   - composer self-update
-
   - composer install --no-interaction
-
   - php artisan key:generate
-
   - php artisan migrate --no-interaction -vvv
 
 script:
   - php artisan test
+
+deploy:
+  provider: heroku
+  api_key:
+    secure: kUAtP6NAFjG2x6rZGXTO+pAI521JAvNb1gUtMcYq8HPZIgQ8QjErnpEzLfVdlTdbAxkwB6yNC3Yz+iUs002lsyAwAaZQq/Oi1Yh2qT0O8PN36UhxAw79DUwWGH+EaHsEB+pN/cI0Y2i41s1ZK5SLpiSHMyKvMVclRkXC6lwG9ugiLiC3bQHay8EYFNnYPOh/0+9WezEP4gapM4jqxHYxpcSe2I2uSsB7mwor1zJX/VFei5FTEU3/zlyI3T+Wp35quPHqsqwv37ptTTuf4zodcMYzhruZ1L1cTJCI17GznCmCygQ1x7GLG3j9iZKmX6vvVgP2jL0q99VyeQ6d+1pmqmzHQw+LNDzxHsTIFc+8ZGb2AWrhxOq3odrLohabsX8ZAHIjBjmrSoIne5WVsfEbitTeU4MUekhOFelxDFNm1tR5VVXqmX0r+JG94amgH25Jb8RYocaS9Gvj6Mlkp10fHsTWD9tsuB2X2P9gpdQ0RKATPRMSLIV43dMe9Bi/F9xONcytxpuHzpLPkdeVyDlSuLnMPwbzn2PMS1th+1XuC1cK75aNrcBfVFJuW/E3ZDvL4TY1m3kKlTYfGmHAfinFyES4yqXbiPDw4HopOogYBafqPlR2HURLYTH6FTwuJ3k6M8jSFaZhiiuEOd0F75IL9nQqPFdSKhzencdZ+FAT/ws=
+  app: libraria-io
