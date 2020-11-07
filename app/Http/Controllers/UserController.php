@@ -40,7 +40,9 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate($this->rules());
+        $rules = $this->rules();
+        $roles['email'][] = Rule::unique('users', 'email');
+        $data = $request->validate($rules);
 
         $data['password'] = Hash::make($data['password']);
 
@@ -73,7 +75,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $data = $request->validate($this->rules('nullable'));
+        $rules = $this->rules('nullable');
+        $roles['email'][] = Rule::unique('users', 'email')
+            ->ignoreModel($user);
+        $data = $request->validate($rules);
 
         if (isset($data['password'])) {
             $data['password'] = Hash::make($data['password']);
@@ -110,7 +115,10 @@ class UserController extends Controller
     {
         return [
             'name' => [$mode, 'string', 'max:255'],
-            'email' => [$mode, 'email', 'max:255', 'unique:' . User::class],
+            'email' => [
+                $mode, 'email',
+                'max:255',
+            ],
             'password' => [$mode, 'string', 'min:6', 'max:255'],
             'role' => [$mode, Rule::in([User::ADMIN, User::NORMAL])]
         ];
